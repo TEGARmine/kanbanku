@@ -5,7 +5,11 @@
         <div class="text-[#667085] font-bold">DONE</div>
 
         {{-- TODO --}}
-        <div class="swim-lane bg-[#c6c1c1] bg-opacity-30 rounded-lg px-5 py-5">
+        <div class="swim-lane bg-[#c6c1c1] bg-opacity-30 rounded-lg px-5 py-5 shadow-[0_65px_60px_-15px_rgba(16,24,40,0.30)]">
+            <div class="flex mb-4 cursor-pointer">
+                <span class="border border-black px-2 rounded-l bg-black text-white">+</span>
+                <h4 class="border-y border-r border-black px-2 rounded-r shadow-xl hover:bg-white">New Task</h4>
+            </div>
             <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
                 <div class="flex items-center gap-2">
                     <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#1</h1>
@@ -41,10 +45,12 @@
         </div>
 
         {{-- DOING --}}
-        <div class="swim-lane bg-blue-400 bg-opacity-30 rounded-lg px-5 py-5">
+        <div class="swim-lane bg-blue-400 bg-opacity-30 rounded-lg px-5 py-5 shadow-[0_65px_60px_-15px_rgba(16,24,40,0.30)]">
             <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
-                <h1 class="text-xl font-bold text-end">#3</h1>
-                <h2 class="text-lg font-bold">Make a Kanban App</h2>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#3</h1>
+                    <h2 class="text-lg font-bold">Fix his kid through any</h2>
+                </div>
                 <div class="my-2 flex items-center gap-2">
                     <span class="text-sm font-bold text-[#98A2B3]">12th Jan</span>
                     <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,8 +64,10 @@
             </div>
 
             <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
-                <h1 class="text-xl font-bold text-end">#4</h1>
-                <h2 class="text-lg font-bold">Make a Kanban App</h2>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#5</h1>
+                    <h2 class="text-lg font-bold">Fix his kid through any</h2>
+                </div>
                 <div class="my-2 flex items-center gap-2">
                     <span class="text-sm font-bold text-[#98A2B3]">12th Jan</span>
                     <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -73,8 +81,10 @@
             </div>
 
             <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
-                <h1 class="text-xl font-bold text-end">#5</h1>
-                <h2 class="text-lg font-bold">Make a Kanban App</h2>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#6</h1>
+                    <h2 class="text-lg font-bold">Fix his kid through any</h2>
+                </div>
                 <div class="my-2 flex items-center gap-2">
                     <span class="text-sm font-bold text-[#98A2B3]">12th Jan</span>
                     <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,8 +98,10 @@
             </div>
 
             <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
-                <h1 class="text-xl font-bold text-end">#6</h1>
-                <h2 class="text-lg font-bold">Make a Kanban App</h2>
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#7</h1>
+                    <h2 class="text-lg font-bold">Fix his kid through any</h2>
+                </div>
                 <div class="my-2 flex items-center gap-2">
                     <span class="text-sm font-bold text-[#98A2B3]">12th Jan</span>
                     <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,10 +116,12 @@
         </div>
 
         {{-- DONE --}}
-        <div class="swim-lane bg-[#4ef551] bg-opacity-30 rounded-lg px-5 py-5">
-            <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
-                <h1 class="text-xl font-bold text-end">#7</h1>
-                <h2 class="text-lg font-bold">Make a Kanban App</h2>
+        <div class="swim-lane bg-[#4ef551] bg-opacity-30 rounded-lg px-5 py-5 shadow-[0_65px_60px_-15px_rgba(16,24,40,0.30)]">
+            <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4 " draggable="true">
+                <div class="flex items-center gap-2">
+                    <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#8</h1>
+                    <h2 class="text-lg font-bold">Fix his kid through any</h2>
+                </div>
                 <div class="my-2 flex items-center gap-2">
                     <span class="text-sm font-bold text-[#98A2B3]">12th Jan</span>
                     <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
