@@ -13,7 +13,7 @@
     <div class="mt-8 flex flex-col gap-[300px]">
         <div>
             <div class="flex flex-col gap-2">
-                <x-nav-link href="{{ route('task.index')}}" :active="request()->routeIs('task.index')">
+                <x-nav-link href="{{ route('task.index')}}" wire:navigate :active="request()->routeIs('task.index')">
                     @if (request()->routeIs('task.index'))
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 3C1 1.89543 1.89543 1 3 1H5C6.10457 1 7 1.89543 7 3V5C7 6.10457 6.10457 7 5 7H3C1.89543 7 1 6.10457 1 5V3Z" stroke="#1D2939" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
