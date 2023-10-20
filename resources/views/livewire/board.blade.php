@@ -1,14 +1,14 @@
 <div>
     <div class="grid grid-cols-3 gap-4">
-        <div class="mb-2 text-[#667085] font-bold">TO DO</div>
-        <div class="text-[#667085] font-bold">DOING</div>
-        <div class="text-[#667085] font-bold">DONE</div>
+        <div class="text-[#667085] font-bold sticky top-0"><span class="px-2 py-1 border border-slate-800 bg-slate-700 text-white">TO DO</span></div>
+        <div class="text-[#667085] font-bold sticky top-0"><span class="px-2 py-1 border border-slate-800 bg-slate-700 text-white">DOING</span></div>
+        <div class="text-[#667085] font-bold sticky top-0"><div class=" flex items-center gap-2 w-[90px] px-2 border border-slate-800 bg-slate-700 text-white"><div class="bg-green-400 w-3 h-3"></div>DONE</div></div>
 
         {{-- TODO --}}
-        <div x-data="{ newTask: false }" class="swim-lane bg-[#c6c1c1] bg-opacity-30 rounded-lg px-5 py-5 min-h-screen">
+        <div x-data="{ newTask: false }" class="swim-lane bg-[#c6c1c1] bg-opacity-30 min-h-screen px-5 py-5">
             <div class="inline-block">
                 <div wire:click="$toggle('formTask')" class="flex mb-4 cursor-pointer">
-                    <span class="border border-black px-2 rounded-l bg-black text-white">+</span>
+                    <span class="border border-black px-2 rounded-l bg-black text-white">{{ $formTask ? '-' : '+' }}</span>
                     <h4 class="border-y border-r border-black px-2 rounded-r shadow-xl hover:bg-white">New Task</h4>
                 </div>
             </div>
@@ -72,28 +72,40 @@
                 </p>
             </div> --}}
             @foreach ($tasks as $task)
+                @php
+                    $tanggal = \Carbon\Carbon::parse($task->date)->format('d');
+                    $bulan = substr(\Carbon\Carbon::parse($task->date)->format('F'), 0, 3);
+                    $tahun = \Carbon\Carbon::parse($task->date)->format('Y');
+                @endphp
                 <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
                     <div class="flex items-center gap-2">
                         <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#{{ $task->id }}</h1>
-                        <h2 class="text-lg font-bold">{{ $task->title }}</h2>
+                        <h2 class="text-lg font-bold">{{ Str::limit($task->title, 20) }}</h2>
                     </div>
                     <div class="my-2 flex items-center gap-2">
-                        <span class="text-sm font-bold text-[#98A2B3]">12th Jan</span>
+                        <span class="text-sm font-bold text-[#98A2B3]">{{ $tanggal . ' ' . $bulan . ' ' . $tahun}}</span>
                         <svg width="4" height="5" viewBox="0 0 4 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="2" cy="2.5" r="2" fill="#C4C4C4"/>
                         </svg>
-                        <span class="text-sm font-bold text-[#98A2B3]">Created by <span class="text-[#667085]">Prahlad</span></span>
+                        <span class="text-sm font-bold text-[#98A2B3]">Created by <span class="text-[#667085]">{{ $task->user->name }}</span></span>
                     </div>
                     <p class="text-sm text-[#98A2B3] mb-3">
                         Please use trello and designs in Dribbble as reference. And carry on...
                     </p>
                 </div>
             @endforeach
-            {{-- {{ $tasks->links() }} --}}
+
+            @if (count($tasksCount) > 10 && $paginate < count($tasksCount))
+                <div wire:click="moreTask" class="mt-6">
+                    <div class="flex justify-center cursor-pointer">
+                        <span class="text-sm">More...</span>
+                    </div>
+                </div>
+            @endif
         </div>
 
         {{-- DOING --}}
-        <div class="swim-lane bg-blue-400 bg-opacity-30 rounded-lg px-5 py-5">
+        <div class="swim-lane bg-[#c6c1c1] bg-opacity-30 px-5 py-5">
             {{-- <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4" draggable="true">
                 <div class="flex items-center gap-2">
                     <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#3</h1>
@@ -164,7 +176,7 @@
         </div>
 
         {{-- DONE --}}
-        <div class="swim-lane bg-[#4ef551] bg-opacity-30 rounded-lg px-5 py-5">
+        <div class="swim-lane bg-[#c6c1c1] bg-opacity-30 px-5 py-5">
             {{-- <div class="task bg-white rounded-lg px-5 py-5 cursor-pointer mb-4 " draggable="true">
                 <div class="flex items-center gap-2">
                     <h1 class="text-xl font-bold border-2 border-[#c6c1c1] inline-block px-1">#8</h1>
@@ -230,4 +242,15 @@
     });
         return closestTask;
     };
+
+    // window.addEventListener("scroll", function() {
+    //     var stickyTodo = document.getElementById("sticky-todo");
+    //     var threshold = 100; // Sesuaikan dengan jarak yang Anda inginkan
+
+    //     if (window.scrollY >= threshold) {
+    //         stickyTodo.style.position = "static"; // Hentikan elemen dari posisi sticky
+    //     } else {
+    //         stickyTodo.style.position = "sticky";
+    //     }
+    // });
 </script>

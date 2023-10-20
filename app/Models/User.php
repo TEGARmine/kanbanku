@@ -61,8 +61,8 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    // public function task()
-    // {
-    //     return $this->belongsTo(Task::class, 'user_id');
-    // }
+    public function task()
+    {
+        return $this->hasMany(Task::class, 'user_id');
+    }
 }

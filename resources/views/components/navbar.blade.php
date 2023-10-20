@@ -1,4 +1,4 @@
-<div x-data="{ open: false }" {{ $attributes->merge(['class' => 'bg-white pt-6 px-6 w-1/5 h-screen font-bold']) }}>
+<div x-data="{ open: false }" {{ $attributes->merge(['class' => 'bg-white border-2 border-opacity-50 border-r-slate-400 pt-6 px-6 w-1/5 h-screen font-bold']) }}>
     <div class="flex items-center justify-between">
         <div class="flex gap-3">
             <div class="bg-gray-800 w-6 h-6 rounded-lg"></div>
