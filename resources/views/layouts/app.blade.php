@@ -40,6 +40,7 @@
 
         @stack('modals')
 
-        @livewireScripts
+        {{-- @livewireScripts --}}
+        @stack('scripts')
     </body>
 </html>

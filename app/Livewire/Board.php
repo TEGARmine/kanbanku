@@ -21,6 +21,7 @@ class Board extends Component
     public $formTask = false;
     public $post;
     public $paginate = 10;
+    public $tes = 'apa aja sisi';
 
     public function mount()
     {
@@ -64,6 +65,16 @@ class Board extends Component
     public function moreTask()
     {
         $this->paginate = $this->paginate + 10;
+    }
+
+    #[On('moveTask')]
+    public function moveTask($data)
+    {
+        $task = Task::where('id', $data['idTask'])->first();
+        if ($data['positionTask'] === 'doing') {
+            $task->status = 'doing';
+            return $task->save();
+        };
     }
 
     public function render()
