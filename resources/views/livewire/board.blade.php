@@ -39,7 +39,12 @@
                     </form>
                 </div>
             @endif
-            @foreach ($tasks as $task)
+            {{-- @php
+                $todoTasks = $tasksCount->filter(function($task) {
+                    return $task->status === 'todo';
+                });
+            @endphp --}}
+            @foreach ($todoTasksAll as $task)
                 @php
                     $tanggal = \Carbon\Carbon::parse($task->date)->format('d');
                     $bulan = substr(\Carbon\Carbon::parse($task->date)->format('F'), 0, 3);
@@ -65,7 +70,7 @@
                 @endif
             @endforeach
 
-            @php
+            {{-- @php
                 $todoTasksCount = count($tasksCount->filter(function($task) {
                     return $task->status === 'todo';
                 }));
@@ -76,17 +81,17 @@
                         <span class="text-sm">More...</span>
                     </div>
                 </div>
-            @endif
+            @endif --}}
         </div>
 
         {{-- DOING --}}
         <div id="doing" class="swim-lane bg-[#c6c1c1] bg-opacity-30 px-5 py-5">
-            @php
+            {{-- @php
                 $doingTasks = $tasksCount->filter(function($task) {
                     return $task->status === 'doing';
                 });
-            @endphp
-            @foreach ($doingTasks as $task)
+            @endphp --}}
+            @foreach ($doingTasksAll as $task)
                 @php
                     $tanggal = \Carbon\Carbon::parse($task->date)->format('d');
                     $bulan = substr(\Carbon\Carbon::parse($task->date)->format('F'), 0, 3);
