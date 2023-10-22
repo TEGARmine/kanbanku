@@ -39,11 +39,6 @@
                     </form>
                 </div>
             @endif
-            {{-- @php
-                $todoTasks = $tasksCount->filter(function($task) {
-                    return $task->status === 'todo';
-                });
-            @endphp --}}
             @foreach ($todoTasksAll as $task)
                 @php
                     $tanggal = \Carbon\Carbon::parse($task->date)->format('d');
@@ -69,28 +64,20 @@
                     </div>
                 @endif
             @endforeach
-
-            {{-- @php
-                $todoTasksCount = count($tasksCount->filter(function($task) {
-                    return $task->status === 'todo';
-                }));
-            @endphp
-            @if ($todoTasksCount > 10 && $paginate < count($tasksCount))
-                <div wire:click="moreTask" class="mt-6">
-                    <div class="flex justify-center cursor-pointer">
-                        <span class="text-sm">More...</span>
+            
+            @if ($paginate < $paginateTodo)
+                <div class="flex justify-center">
+                    <div wire:click="moreTask" class="mt-6 inline-block">
+                        <div class="cursor-pointer">
+                            <span class="text-sm">More...</span>
+                        </div>
                     </div>
                 </div>
-            @endif --}}
+            @endif
         </div>
 
         {{-- DOING --}}
         <div id="doing" class="swim-lane bg-[#c6c1c1] bg-opacity-30 px-5 py-5">
-            {{-- @php
-                $doingTasks = $tasksCount->filter(function($task) {
-                    return $task->status === 'doing';
-                });
-            @endphp --}}
             @foreach ($doingTasksAll as $task)
                 @php
                     $tanggal = \Carbon\Carbon::parse($task->date)->format('d');
@@ -183,11 +170,9 @@
 
                     setTimeout(() => {
                         @this.dispatch('moveTask', [{ idTask: idTask, positionTask: positionTask }]);
-                        console.log(positionTask);
                     }, 3000);
                     return;
                 }
-                console.log("stop")
 
             });
         });

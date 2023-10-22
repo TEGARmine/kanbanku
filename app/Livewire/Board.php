@@ -21,14 +21,22 @@ class Board extends Component
     // public $tasks = [];
     public $formTask = false;
     public $post;
+
     public $paginate = 10;
+    public $paginateTodo;
 
     // tasks
     public $todoTasks = [];
 
-    public function mount()
+    public function paginateTodos()
     {
-        // $this->tasks = Task::with('user')->get();
+        $tasks = Task::with('user')->get();
+
+        $todoTasks = count($tasks->filter(function ($task) {
+            return $task->status === 'todo';
+        }));
+
+        $this->paginateTodo = $todoTasks;
     }
 
     public function store()
@@ -62,12 +70,15 @@ class Board extends Component
     public function taskAdded($post)
     {
         $this->post = $post;
-        $this->paginate = $this->paginate + 1;
+        $this->paginate += 10;
     }
 
     public function moreTask()
     {
-        $this->paginate = $this->paginate + 10;
+        if ($this->paginateTodo > $this->paginate) {
+            $this->paginate += 10;
+        }
+        return;
     }
 
     #[On('moveTask')]
@@ -82,7 +93,9 @@ class Board extends Component
 
     public function render()
     {
-        // $this->tasksCount = $this->tasksCount;
+
+        $this->paginateTodos();
+
         $tasks = Task::with('user')->get();
 
         $todoTasks = $tasks->filter(function ($task) {
@@ -92,12 +105,6 @@ class Board extends Component
         $doingTasks = $tasks->filter(function ($task) {
             return $task->status === 'doing';
         });
-
-        // $todoCollection = collect($this->todoTasks);
-        // $this->todoTasks = $todoCollection->paginate($this->paginate);
-        // $tasks = Task::with('user')->orderByDesc('created_at')->paginate($this->paginate);
-
-
 
         $perPage = $this->paginate;
         $currentPage = Paginator::resolveCurrentPage('page');
@@ -121,7 +128,6 @@ class Board extends Component
             'path' => Paginator::resolveCurrentPath(),
             'pageName' => 'page',
         ]);
-
 
         return view('livewire.board', compact('todoTasksAll', 'doingTasksAll'));
     }
