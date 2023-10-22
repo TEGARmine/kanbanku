@@ -10,7 +10,6 @@
                 <div wire:click="$toggle('formTask')" class="flex mb-4 cursor-pointer">
                     <span class="border border-black px-2 rounded-l bg-black text-white">{{ $formTask ? '-' : '+' }}</span>
                     <h4 class="border-y border-r border-black px-2 rounded-r shadow-xl hover:bg-white">New Task</h4>
-                    {{-- <p>{{ $tes }}</p> --}}
                 </div>
             </div>
             @if ($formTask)
@@ -66,7 +65,12 @@
                 @endif
             @endforeach
 
-            @if (count($tasksCount) > 10 && $paginate < count($tasksCount))
+            @php
+                $todoTasksCount = count($tasksCount->filter(function($task) {
+                    return $task->status === 'todo';
+                }));
+            @endphp
+            @if ($todoTasksCount > 10 && $paginate < count($tasksCount))
                 <div wire:click="moreTask" class="mt-6">
                     <div class="flex justify-center cursor-pointer">
                         <span class="text-sm">More...</span>
@@ -77,7 +81,12 @@
 
         {{-- DOING --}}
         <div id="doing" class="swim-lane bg-[#c6c1c1] bg-opacity-30 px-5 py-5">
-            @foreach ($tasks as $task)
+            @php
+                $doingTasks = $tasksCount->filter(function($task) {
+                    return $task->status === 'doing';
+                });
+            @endphp
+            @foreach ($doingTasks as $task)
                 @php
                     $tanggal = \Carbon\Carbon::parse($task->date)->format('d');
                     $bulan = substr(\Carbon\Carbon::parse($task->date)->format('F'), 0, 3);
@@ -103,13 +112,13 @@
                 @endif
             @endforeach
 
-            @if (count($tasksCount) > 10 && $paginate < count($tasksCount))
+            {{-- @if (count($tasksCount) > 10 && $paginate < count($tasksCount))
                 <div wire:click="moreTask" class="mt-6">
                     <div class="flex justify-center cursor-pointer">
                         <span class="text-sm">More...</span>
                     </div>
                 </div>
-            @endif
+            @endif --}}
         </div>
 
         {{-- DONE --}}
@@ -141,17 +150,40 @@
         draggables.forEach((task) => {
             task.addEventListener("dragstart", () => {
                 task.classList.add("is-dragging");
+                task.setAttribute('data-prev-position', task.closest('.swim-lane').id);
             });
             task.addEventListener("dragend", () => {
                 task.classList.remove("is-dragging");
+                
                 // // Ambil ID zona saat elemen tugas selesai di-drop
                 const positionTask = task.closest('.swim-lane').id;
+
+                let countTodo = 0;
+                let countDoing = 0;
+                let countDone = 0;
+                droppables.forEach((board) => {
+                    countDoing = document.querySelectorAll("#doing .task").length;
+                    countTodo = document.querySelectorAll("#todo .task").length;
+                    countDone = document.querySelectorAll("#done .task").length;
+                })
+
                 if(positionTask === 'doing') {
                     const idTask = task.getAttribute('data-task');
+                    const prevPositionTask = task.getAttribute('data-prev-position');
+                    
+                    if (prevPositionTask === 'doing') {
+                        console.log(prevPositionTask);
+                        return;
+                    }
+
                     setTimeout(() => {
                         @this.dispatch('moveTask', [{ idTask: idTask, positionTask: positionTask }]);
+                        console.log(positionTask);
                     }, 3000);
+                    return;
                 }
+                console.log("stop")
+
             });
         });
 
