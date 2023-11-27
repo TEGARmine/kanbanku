@@ -164,7 +164,6 @@
                     const prevPositionTask = task.getAttribute('data-prev-position');
                     
                     if (prevPositionTask === 'doing') {
-                        console.log(prevPositionTask);
                         return;
                     }
 

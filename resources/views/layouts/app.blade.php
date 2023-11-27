@@ -11,6 +11,11 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -20,7 +25,7 @@
     <body class="font-sans antialiased">
         {{-- <x-banner /> --}}
 
-        <div class="min-h-screen bg-gray-100">
+        {{-- <div class="min-h-screen bg-gray-100"> --}}
             {{-- @livewire('navigation-menu') --}}
 
             <!-- Page Heading -->
@@ -36,7 +41,7 @@
             {{-- <main> --}}
                 {{ $slot }}
             {{-- </main> --}}
-        </div>
+        {{-- </div> --}}
 
         @stack('modals')
 
